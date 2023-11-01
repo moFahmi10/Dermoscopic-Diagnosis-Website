@@ -1,0 +1,46 @@
+<%- include("header"); -%>
+
+<h1>Home</h1>
+<p> <%= HomeContent %> </p>
+
+
+<form  method="POST" action="/upload"  enctype="multipart/form-data">
+   <div id="img-preview">
+     <label> Please Choose a dermoscopic image: </label>
+     <input  type="file"   name= "image" id="choose-file" >
+     <img id='image' src=""/>
+    
+   </div> 
+
+
+
+  <br>
+  <button class= "btn btn-primary" type="submit" id="avatar" name="submit"> Submit </button>
+</form>
+
+
+<script type="text/javascript">
+const chooseFile = document.getElementById("choose-file");
+const imgPreview = document.getElementById("img-preview");
+
+chooseFile.addEventListener("change", function () {
+  getImgData();
+});
+
+function getImgData() {
+  const files = chooseFile.files[0];
+  if (files) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(files);
+    fileReader.addEventListener("load", function () {
+      imgPreview.style.display = "block";
+      document.getElementById('image').src = this.result;
+    });    
+  }
+}
+
+</script>
+   
+
+
+<%- include("footer"); -%>
